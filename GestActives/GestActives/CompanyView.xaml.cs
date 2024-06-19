@@ -10,26 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GestActives
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para CompanyView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CompanyView : Window
     {
-        public MainWindow()
+        public CompanyView()
         {
             InitializeComponent();
         }
 
-        private void ProbarButton_Click(object sender, RoutedEventArgs e)
+        private void SalirButton_Click(object sender, RoutedEventArgs e)
         {
-            CompanyView companyView = new CompanyView();
-            companyView.Owner = this;
-            companyView.ShowDialog();
+            DialogResult = true;
         }
     }
 }

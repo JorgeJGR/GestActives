@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="probarButton" Style="{StaticResource Actions}" Content="Probar" Tag="Imagenes/look.ico" Click="ProbarButton_Click"/>
     </Grid>
 </Window>

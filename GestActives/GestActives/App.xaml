@@ -18,6 +18,7 @@
         <Style TargetType="Button" x:Key="Actions">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="{StaticResource NormalBrush}"/>
@@ -41,5 +42,29 @@
             </Setter>
         </Style>
 
+        <Style TargetType="{x:Type StackPanel}" x:Key="Encabezado">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}" x:Key="Mediano">
+            <Setter Property="Width" Value="125"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+
+        <Style TargetType="Label" x:Key="Titulo">
+            <Setter Property="FontSize" Value="30"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+        </Style>
     </Application.Resources>
+
 </Application>
