@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,22 @@ namespace GestActives
     /// </summary>
     public partial class CompanyView : Window
     {
+        public ObservableCollection<Company> Companies { get; set; }
+
         public CompanyView()
         {
             InitializeComponent();
+            LoadCompanies();
+            DataContext = this;
+        }
+
+        private void LoadCompanies()
+        {
+            using (var context = new GestActivesContext())
+            {
+                var companies = context.Companies.ToList();
+                Companies = new ObservableCollection<Company>(companies);
+            }
         }
 
         private void SalirButton_Click(object sender, RoutedEventArgs e)

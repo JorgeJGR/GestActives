@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestActives"
         mc:Ignorable="d"
-        Title="Compañias" Height="450" Width="800" Background="White"
+        Title="Compañias" Height="550" Width="900" Background="White"
         ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     
     <Grid Margin="10" Background="Gray">
@@ -26,18 +26,43 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Background="White" Margin="5">
-            <DataGrid x:Name="listCompanyDataGrid"></DataGrid>
+            <DataGrid x:Name="listCompanyDataGrid" ItemsSource="{Binding Companies}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdCompany}" Width="25"/>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="100"/>
+                    <DataGridTemplateColumn Header="Externa" Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding External}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Teléfono" Binding="{Binding Telephone}" Width="50"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Lavender" Margin="5">
             <StackPanel Background="LightGray" Margin="5">
                 <Label>Nombre Compañia</Label>
-                <TextBox x:Name="nombreCompañiaTextBox" Style="{StaticResource Mediano}"></TextBox>
+                <TextBox x:Name="nombreTextBox" Style="{StaticResource Mediano}"></TextBox>
                 <Button x:Name="buscarButton" Style="{StaticResource Actions}" Content="Buscar" Tag="Imagenes/look.ico" HorizontalAlignment="Left"></Button>
             </StackPanel>
             <StackPanel Background="LightGray" Margin="5">
                 <Label>Tipo de compañia</Label>
-                <TextBox x:Name="externaTextBox" Style="{StaticResource Mediano}"></TextBox>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="extenaChecbox" VerticalAlignment="Center"></CheckBox>
+                    <TextBox x:Name="externaTextBox" Style="{StaticResource Mediano}"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Teléfono</Label>
+                <TextBox x:Name="telefonoTextBox" Style="{StaticResource Corto}"></TextBox>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Email</Label>
+                <TextBox x:Name="emailTextBox" Style="{StaticResource Largo}"></TextBox>
             </StackPanel>
         </StackPanel>
         
