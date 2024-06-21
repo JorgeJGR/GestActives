@@ -15,26 +15,51 @@ namespace GestActives
             _context = context;
         }
 
-        public void InsertUser(Company company)
+        public void InsertCompany(Company company)
         {
             _context.Companies.Add(company);
             _context.SaveChanges();
         }
 
-        public void UpdateUser(Company company)
+
+        public void UpdateCompany(Company company)
         {
-            _context.Companies.Update(company);
-            _context.SaveChanges();
+            var existingCompany = _context.Companies.Find(company.IdCompany);
+            if (existingCompany != null)
+            {
+                existingCompany.Name = company.Name;
+                existingCompany.External = company.External;
+                existingCompany.Telephone = company.Telephone;
+                existingCompany.Email = company.Email;
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("La compañía no existe.");
+            }
         }
 
-        public void DeleteUser(int id)
+
+
+        public void DeleteCompany(string companyName)
         {
-            var company = _context.Companies.Find(id);
+            var company = _context.Companies.FirstOrDefault(c => c.Name == companyName);
             if (company != null)
             {
                 _context.Companies.Remove(company);
                 _context.SaveChanges();
             }
+        }
+
+
+        public List<Company> GetAllCompanies()
+        {
+            return _context.Companies.ToList();
+        }
+
+        public Company GetCompanyByName(string companyName)
+        {
+            return _context.Companies.FirstOrDefault(c => c.Name == companyName);
         }
     }
 }

@@ -7,9 +7,44 @@
         mc:Ignorable="d"
         Title="Compañias" Height="550" Width="900" Background="White"
         ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
-    
-    <Grid Margin="10" Background="Gray">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:CustomCommands.BuscarNameCompany"
+                        Executed="BuscarNameCompany_Executed"
+                        CanExecute="BuscarNameCompany_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.LimpiarCompany"
+                        Executed="LimpiarCompany_Executed"
+                        CanExecute="LimpiarCompany_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.GrabarCompany"
+                        Executed="GrabarCompany_Executed"
+                        CanExecute="GrabarCompany_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.EliminarCompany"
+                        Executed="EliminarCompany_Executed"
+                        CanExecute="EliminarCompany_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.ActualizarCompany"
+                        Executed="ActualizarCompany_Executed"
+                        CanExecute="ActualizarCompany_CanExecute"/>
         
+    </Window.CommandBindings>
+
+    <Window.Resources>
+
+        <local:FieldsEmptyToBoolConverter x:Key="FieldsEmptyToBoolConverter"/>
+
+        <Style TargetType="TextBox" x:Key="ExternaTextBoxStyle"  BasedOn="{StaticResource Mediano}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=externaChecBox, Path=IsChecked}" Value="True">
+                    <Setter Property="Text" Value="Externa" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=externaChecBox, Path=IsChecked}" Value="False">
+                    <Setter Property="Text" Value="Interna" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="10" Background="Gray">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="250"></ColumnDefinition>
@@ -26,57 +61,80 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Background="White" Margin="5">
-            <DataGrid x:Name="listCompanyDataGrid" ItemsSource="{Binding Companies}" AutoGenerateColumns="False" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding IdCompany}" Width="25"/>
-                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="100"/>
-                    <DataGridTemplateColumn Header="Externa" Width="50">
+            <DataGrid x:Name="listCompanyDataGrid" ItemsSource="{Binding Companies}"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdCompany}" Width="30" CanUserResize="False" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="100" CanUserResize="False" />
+                    <DataGridTemplateColumn Header="Externa" Width="50" CanUserResize="False" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding External}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Teléfono" Binding="{Binding Telephone}" Width="50"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                    <DataGridTextColumn Header="Teléfono" Binding="{Binding Telephone}" Width="70" CanUserResize="False" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" CanUserResize="False" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Background="Lavender" Margin="5">
+        <StackPanel x:Name="formularioStackPanel" Grid.Row="1" Grid.Column="1" Background="Lavender" Margin="5">
             <StackPanel Background="LightGray" Margin="5">
                 <Label>Nombre Compañia</Label>
                 <TextBox x:Name="nombreTextBox" Style="{StaticResource Mediano}"></TextBox>
-                <Button x:Name="buscarButton" Style="{StaticResource Actions}" Content="Buscar" Tag="Imagenes/look.ico" HorizontalAlignment="Left"></Button>
+                <Button x:Name="buscarButton" Command="local:CustomCommands.BuscarNameCompany" Style="{StaticResource Actions}"
+            Content="Buscar" Tag="Imagenes/look.ico" HorizontalAlignment="Left">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource FieldsEmptyToBoolConverter}">
+                            <Binding ElementName="externaChecBox" Path="IsChecked" />
+                            <Binding ElementName="telefonoTextBox" Path="Text" />
+                            <Binding ElementName="emailTextBox" Path="Text" />
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
             </StackPanel>
             <StackPanel Background="LightGray" Margin="5">
                 <Label>Tipo de compañia</Label>
                 <StackPanel Orientation="Horizontal">
-                    <CheckBox x:Name="extenaChecbox" VerticalAlignment="Center"></CheckBox>
-                    <TextBox x:Name="externaTextBox" Style="{StaticResource Mediano}"></TextBox>
+                    <CheckBox x:Name="externaChecBox" VerticalAlignment="Center" Checked="OnFormFieldChanged" Unchecked="OnFormFieldChanged"></CheckBox>
+                    <TextBox x:Name="externaTextBox" Style="{StaticResource ExternaTextBoxStyle}" IsReadOnly="True"></TextBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Background="LightGray" Margin="5">
                 <Label>Teléfono</Label>
-                <TextBox x:Name="telefonoTextBox" Style="{StaticResource Corto}"></TextBox>
+                <TextBox x:Name="telefonoTextBox" Style="{StaticResource Corto}" TextChanged="OnFormFieldChanged"></TextBox>
             </StackPanel>
             <StackPanel Background="LightGray" Margin="5">
                 <Label>Email</Label>
-                <TextBox x:Name="emailTextBox" Style="{StaticResource Largo}"></TextBox>
+                <TextBox x:Name="emailTextBox" Style="{StaticResource Largo}" TextChanged="OnFormFieldChanged"></TextBox>
             </StackPanel>
         </StackPanel>
-        
+
+
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Background="LightGray">
-            <Button x:Name="grabarButton" Style="{StaticResource Actions}" Content="Grabar" Tag="Imagenes/save.ico"/>
-            <Button x:Name="insertarButton" Style="{StaticResource Actions}" Content="Insertar" Tag="Imagenes/insert.ico"></Button>
-            <Button x:Name="eliminarButton" Style="{StaticResource Actions}" Content="Eliminar" Tag="Imagenes/delete.ico"></Button>
-            <Button x:Name="limpiarButton" Style="{StaticResource Actions}" Content="Limpiar" Tag="Imagenes/clear.ico"></Button>
+            <Button x:Name="grabarButton" Style="{StaticResource Actions}"
+            Command="local:CustomCommands.GrabarCompany"
+            IsEnabled="False" Content="Grabar" Tag="Imagenes/save.ico"/>
+            
+            <Button x:Name="actualizarButton" Style="{StaticResource Actions}" 
+            IsEnabled="False" Content="Actualizar" Tag="Imagenes/insert.ico"
+            Command="local:CustomCommands.ActualizarCompany"/>
+            
+            <Button x:Name="eliminarButton" Style="{StaticResource Actions}" 
+            Command="local:CustomCommands.EliminarCompany"
+            IsEnabled="False" Content="Eliminar" Tag="Imagenes/delete.ico"/>
+            
+            <Button x:Name="limpiarButton" Style="{StaticResource Actions}"
+            Command="local:CustomCommands.LimpiarCompany"
+            Content="Limpiar" Tag="Imagenes/clear.ico"></Button>
+            
         </StackPanel>
+
 
         <StackPanel Grid.Row="2" Grid.Column="1" Background="LightGray">
             <Button x:Name="salirButton" Style="{StaticResource Actions}" HorizontalAlignment="Right"
                     Content="Salir" Tag="Imagenes/exit.ico" Click="SalirButton_Click"/>
         </StackPanel>
-
     </Grid>
 </Window>

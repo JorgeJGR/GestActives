@@ -109,6 +109,7 @@ C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\bin\Debug
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\CompanyView.g.cs
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\MainWindow.g.cs
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\App.g.cs
+C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives_MarkupCompile.cache
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives_MarkupCompile.lref
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\App.baml
@@ -121,4 +122,3 @@ C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.csproj.CopyComplete
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.exe
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.pdb
-C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.csproj.AssemblyReference.cache

@@ -25,7 +25,7 @@ namespace GestActives
                 entity.Property(e => e.Telephone).IsRequired(false);
                 entity.Property(e => e.Email).IsRequired(false);
 
-                entity.HasData(new Company { IdCompany = 1, Name = "Monbake", External = false });
+                entity.HasData(new Company { IdCompany = 1, Name = "Monbake", External = false, Telephone = "655674379", Email = "jorge.guijarro@monbake.com" });
             });
         }
     }

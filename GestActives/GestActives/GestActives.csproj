@@ -237,7 +237,9 @@
     <Compile Include="CompanyView.xaml.cs">
       <DependentUpon>CompanyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomCommands.cs" />
     <Compile Include="DatabaseInitializer.cs" />
+    <Compile Include="FieldsEmptyToBoolConverter.cs" />
     <Compile Include="GestActivesContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
