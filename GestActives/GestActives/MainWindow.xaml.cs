@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace GestActives
 {
@@ -16,10 +17,9 @@ namespace GestActives
         private void ProbarButton_Click(object sender, RoutedEventArgs e)
         {
             CompanyView companyView = new CompanyView();
-
             companyView.Owner = this;
             companyView.ShowDialog();
         }
+
     }
 }
-

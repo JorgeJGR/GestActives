@@ -122,3 +122,4 @@ C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.csproj.CopyComplete
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.exe
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.pdb
+C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.csproj.AssemblyReference.cache

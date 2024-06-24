@@ -103,7 +103,8 @@ namespace GestActives
             => External ? TipoEmpresa.Externa.ToString() : TipoEmpresa.Interna.ToString();
    
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected void NotifyPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     }
 }

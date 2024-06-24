@@ -232,6 +232,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommercialAgent.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="CompanyService.cs" />
     <Compile Include="CompanyView.xaml.cs">
@@ -239,14 +240,18 @@
     </Compile>
     <Compile Include="CustomCommands.cs" />
     <Compile Include="DatabaseInitializer.cs" />
+    <Compile Include="ExternalAssembler.cs" />
     <Compile Include="FieldsEmptyToBoolConverter.cs" />
     <Compile Include="GestActivesContext.cs" />
+    <Compile Include="InternalAssembler.cs" />
+    <Compile Include="IPerson.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
