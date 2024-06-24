@@ -1,0 +1,136 @@
+﻿<Window x:Class="GestActives.PersonView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestActives"
+        mc:Ignorable="d"
+         Title="Personas" Height="750" Width="1100" Background="White"
+        ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:CustomCommands.BuscarIdPerson"
+                        Executed="BuscarIdPerson_Executed"
+                        CanExecute="BuscarIdPerson_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.GrabarPerson"
+                        Executed="GrabarPerson_Executed"
+                        CanExecute="GrabarPerson_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.LimpiarPerson"
+                        Executed="LimpiarPerson_Executed"
+                        CanExecute="LimpiarPerson_CanExecute"/>
+    </Window.CommandBindings>
+
+    <Window.Resources>
+        <local:FieldsEmptyToBoolConverter x:Key="FieldsEmptyToBoolConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="10" Background="Gray">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Encabezado}">
+            <Label Style="{StaticResource Titulo}">Gestión de personas</Label>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Background="White" Margin="5">
+            <DataGrid x:Name="listPersonDataGrid" ItemsSource="{Binding Persons}"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdPerson}" Width="30" CanUserResize="False" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="100" CanUserResize="False" />
+                    <DataGridTextColumn Header="Apellidos" Binding="{Binding Surname}" Width="100" CanUserResize="False" />
+                    <DataGridTextColumn Header="Empresa" Binding="{Binding CompanyName}" Width="100" CanUserResize="False" />
+                    <DataGridTextColumn Header="Teléfono" Binding="{Binding Telephone}" Width="70" CanUserResize="False" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" CanUserResize="False" />
+                    <DataGridTextColumn Header="Tipo Persona" Binding="{Binding Discriminator}" Width="110" CanUserResize="False" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel x:Name="formularioStackPanel" Grid.Row="1" Grid.Column="1" Background="Lavender" Margin="5">
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Identificador</Label>
+                <TextBox x:Name="identificadorTextBox" Style="{StaticResource Corto}"></TextBox>
+                <Button x:Name="buscarButton" Command="local:CustomCommands.BuscarIdPerson" Style="{StaticResource Actions}"
+            Content="Buscar" Tag="Imagenes/look.ico" HorizontalAlignment="Left">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource FieldsEmptyToBoolConverter}">
+                            <Binding ElementName="nombreTextBox" Path="Text" />
+                            <Binding ElementName="apellidosTextBox" Path="Text" />
+                            <Binding ElementName="empresaTextBox" Path="Text" />
+                            <Binding ElementName="telefonoTextBox" Path="Text" />
+                            <Binding ElementName="emailTextBox" Path="Text" />
+                            <Binding ElementName="tipoPersonaListBox" Path="SelectedItem" />
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+           
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Nombre</Label>
+                <TextBox x:Name="nombreTextBox" Style="{StaticResource Mediano}" TextChanged="OnFormFieldChanged"></TextBox>
+                <StackPanel Orientation="Horizontal">
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Apellidos</Label>
+                <TextBox x:Name="apellidosTextBox" Style="{StaticResource Mediano}" TextChanged="OnFormFieldChanged"></TextBox>
+                <StackPanel Orientation="Horizontal">
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Empresa</Label>
+                <TextBox x:Name="empresaTextBox" Style="{StaticResource Mediano}" TextChanged="OnFormFieldChanged"></TextBox>
+                <StackPanel Orientation="Horizontal">
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Teléfono</Label>
+                <TextBox x:Name="telefonoTextBox" Style="{StaticResource Corto}" TextChanged="OnFormFieldChanged"></TextBox>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Email</Label>
+                <TextBox x:Name="emailTextBox" Style="{StaticResource Largo}" TextChanged="OnFormFieldChanged"></TextBox>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <Label>Tipo Persona</Label>
+                <ComboBox x:Name="tipoPersonaCombobox" Width="120" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="5"
+                         SelectionChanged="OnTipoPersonaSelectionChanged"></ComboBox>
+            </StackPanel>
+
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Background="LightGray">
+            <Button x:Name="grabarButton" Style="{StaticResource Actions}"
+            Command="local:CustomCommands.GrabarPerson"
+            IsEnabled="False" Content="Grabar" Tag="Imagenes/save.ico"/>
+
+            <Button x:Name="actualizarButton" Style="{StaticResource Actions}" 
+            IsEnabled="False" Content="Actualizar" Tag="Imagenes/insert.ico"/>
+
+            <Button x:Name="eliminarButton" Style="{StaticResource Actions}" 
+           
+            IsEnabled="False" Content="Eliminar" Tag="Imagenes/delete.ico"/>
+
+            <Button x:Name="limpiarButton" Style="{StaticResource Actions}"
+            Command="local:CustomCommands.LimpiarPerson"
+            Content="Limpiar" Tag="Imagenes/clear.ico"></Button>
+
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Background="LightGray">
+            <Button x:Name="salirButton" Style="{StaticResource Actions}" HorizontalAlignment="Right"
+                    Content="Salir" Tag="Imagenes/exit.ico" Click="SalirButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

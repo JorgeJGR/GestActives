@@ -43,5 +43,32 @@ namespace GestActives
                 typeof(CustomCommands)
             );
 
+        public static readonly RoutedUICommand BuscarIdPerson = new RoutedUICommand
+            (
+                "BuscarIdPerson",
+                "BuscarIdPerson",
+                typeof(CustomCommands)
+            );
+
+        public static readonly RoutedUICommand GrabarPerson = new RoutedUICommand
+            (
+                "GrabarPersona",
+                "GrabarPersona",
+                typeof(CustomCommands)
+            );
+
+        public static readonly RoutedUICommand LimpiarPerson = new RoutedUICommand
+            (
+                "LimpiarPersona",
+                "LimpiarPersona",
+                typeof(CustomCommands)
+            );
+        public static readonly RoutedUICommand EliminarPerson = new RoutedUICommand
+            (
+                "EliminarPersona",
+                "EliminarPersona",
+                typeof(CustomCommands)
+            );
+
     }
 }

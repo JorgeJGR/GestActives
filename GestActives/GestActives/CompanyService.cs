@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GestActives
 {
@@ -35,11 +36,9 @@ namespace GestActives
             }
             else
             {
-                throw new Exception("La compañía no existe.");
+                throw new CompanyException("La compañía no existe.");
             }
         }
-
-
 
         public void DeleteCompany(string companyName)
         {
@@ -51,15 +50,57 @@ namespace GestActives
             }
         }
 
-
-        public List<Company> GetAllCompanies()
+        public Company GetOrCreateCompany(string companyName)
         {
-            return _context.Companies.ToList();
+            // Definir la compañía por defecto
+            var defaultCompany = new Company
+            {
+                Name = "Sin Nombre",
+                External = false,
+                Telephone = "",
+                Email = ""
+            };
+
+            try
+            {
+                // Buscar la empresa por nombre
+                var existingCompany = _context.Companies.FirstOrDefault(c => c.Name == companyName);
+
+                if (existingCompany != null)
+                {
+                    // Devolver la empresa existente si se encuentra
+                    return existingCompany;
+                }
+                else
+                {
+                    // Buscar la empresa predeterminada "Sin Nombre"
+                    var defaultExistingCompany = _context.Companies.FirstOrDefault(c => c.Name == "Sin Nombre");
+
+                    if (defaultExistingCompany == null)
+                    {
+                        // Si la empresa "Sin Nombre" no existe, crearla sin asignar manualmente el IdCompany
+                        _context.Companies.Add(defaultCompany);
+                        _context.SaveChanges();
+                        defaultExistingCompany = defaultCompany;
+                    }
+
+                    // Mostrar un mensaje emergente indicando que el registro debe ser modificado
+                    MessageBox.Show("No se encontró la empresa especificada. Se usará la empresa predeterminada 'Sin Nombre'. Por favor, modifique este registro cuando sea posible.");
+
+                    // Devolver la empresa predeterminada
+                    return defaultExistingCompany;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción que ocurra
+                MessageBox.Show($"Error al obtener o crear la empresa: {ex.Message}");
+                return null;
+            }
         }
 
-        public Company GetCompanyByName(string companyName)
-        {
-            return _context.Companies.FirstOrDefault(c => c.Name == companyName);
-        }
+
+        public List<Company> GetAllCompanies() => _context.Companies.ToList();
+
     }
 }

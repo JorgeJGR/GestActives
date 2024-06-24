@@ -16,7 +16,7 @@ namespace GestActives
         private Company enterprise;
         private string telephone;
         private string email;
-
+        private string discriminator { get; set; }
         [Required]
         public string Name
         {
@@ -59,7 +59,7 @@ namespace GestActives
                 }
                 else
                 {
-                    throw new ArgumentException("Enterprise cannot be null.");
+                    throw new PersonException("La empresa no puede ser nula.");
                 }
             }
         }
@@ -90,6 +90,22 @@ namespace GestActives
             }
         }
 
+        public string Discriminator
+        {
+            get => discriminator;
+            set
+            {
+                if (discriminator != value)
+                {
+                    discriminator = value;
+                    NotifyPropertyChanged("Discriminator");
+                }
+            }
+        }
+
+        [NotMapped]
+        public string CompanyName => Enterprise?.Name;
+
         public string FullName() => Surname + ", " + Name;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -97,4 +113,3 @@ namespace GestActives
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
-

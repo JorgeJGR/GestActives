@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestActives
+﻿namespace GestActives
 {
-    interface IPerson
+    public interface IPerson
     {
         string Name { get; set; }
         string Surname { get; set; }
         Company Enterprise { get; set; }
-        string FullName();
+        string Telephone { get; set; }
+        string Email { get; set; }
+        string Discriminator { get; set; }
+        string FullName();        
     }
 }

@@ -66,7 +66,7 @@ namespace GestActives
 
             try
             {
-                var company = _companyService.GetCompanyByName(companyName);
+                var company = _companyService.GetOrCreateCompany(companyName);
 
                 if (company != null)
                 {
@@ -91,24 +91,22 @@ namespace GestActives
                 }
                 else
                 {
-                    var result = MessageBox.Show("No se encontró ninguna compañía con ese nombre. ¿Desea añadir una nueva compañía?", "Compañía no encontrada",
+                    var result = MessageBox.Show("No se encontró ninguna compañía con ese nombre. ¿Desea añadir una nueva Compañía?", "Compañía no encontrada",
                         MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        MessageBox.Show("Complete los campos para la nueva compañía y haga clic en 'Grabar'.");
+                        MessageBox.Show("Complete los campos para la nueva Compañía y haga clic en 'Grabar'.");
                         buscarButton.IsEnabled = false;
                         grabarButton.IsEnabled = true;
                     }
                 }
             }
-            catch (Exception ex)
+            catch (CompanyException ex)
             {
                 MessageBox.Show($"Error al buscar la compañía: {ex.Message}");
             }
         }
-
-
 
         private void BuscarNameCompany_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -177,7 +175,6 @@ namespace GestActives
             listCompanyDataGrid.SelectedItem = null;
 
         }
-
 
         private void LimpiarCompany_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

@@ -16,10 +16,17 @@ namespace GestActives
 
         private void ProbarButton_Click(object sender, RoutedEventArgs e)
         {
-            CompanyView companyView = new CompanyView();
-            companyView.Owner = this;
-            companyView.ShowDialog();
+            PersonView personView = new PersonView();
+            personView.Owner = this;
+            personView.ShowDialog();
         }
+
+        //private void ProbarButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    CompanyView companyView = new CompanyView();
+        //    companyView.Owner = this;
+        //    companyView.ShowDialog();
+        //}
 
     }
 }

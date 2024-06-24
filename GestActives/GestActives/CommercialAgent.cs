@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestActives
 {
-    public class CommercialAgent : Person, INotifyPropertyChanged
+    public class CommercialAgent : Person
     {
         public CommercialAgent() { }
 
@@ -18,13 +18,8 @@ namespace GestActives
             Enterprise = enterprise;
             Telephone = telephone;
             Email = email;
+            Discriminator = "CommercialAgent";
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

@@ -123,3 +123,5 @@ C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.exe
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.pdb
 C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\GestActives.csproj.AssemblyReference.cache
+C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\PersonView.g.cs
+C:\Users\jjgui\OneDrive\Escritorio\GestActives\GestActives\GestActives\obj\Debug\PersonView.baml

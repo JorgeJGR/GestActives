@@ -26,7 +26,8 @@ namespace GestActives
                 entity.Property(e => e.Telephone).IsRequired(false);
                 entity.Property(e => e.Email).IsRequired(false);
 
-                entity.HasData(new Company { IdCompany = 1, Name = "Monbake", External = false, Telephone = "655674379", Email = "jorge.guijarro@monbake.com" });
+                entity.HasData(new Company { IdCompany = 1, Name = "Monbake", External = false, Telephone = "948235150", Email = "MantenimientoAlican@monbake.com" });
+                entity.HasData(new Company { IdCompany = 2, Name = "Sin Nombre", External = false, Telephone = "", Email = "" });
             });
 
             modelBuilder.Entity<Person>(entity =>
@@ -46,9 +47,9 @@ namespace GestActives
                 entity.Property(e => e.Email).IsRequired(false);
 
                 entity.HasDiscriminator<string>("Discriminator")
-                      .HasValue<InternalAssembler>("InternalAssembler")
-                      .HasValue<ExternalAssembler>("ExternalAssembler")
-                      .HasValue<CommercialAgent>("CommercialAgent");
+                      .HasValue<InternalAssembler>("Montador Propio")
+                      .HasValue<ExternalAssembler>("Montador Externo")
+                      .HasValue<CommercialAgent>("Comercial");
 
                 entity.HasData(new
                 {
@@ -58,7 +59,7 @@ namespace GestActives
                     CompanyId = 1,
                     Telephone = (string)null,
                     Email = (string)null,
-                    Discriminator = "InternalAssembler"
+                    Discriminator = "Montador Propio"
                 });
             });
         }

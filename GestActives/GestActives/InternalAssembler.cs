@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestActives
 {
-    public class InternalAssembler : Person, INotifyPropertyChanged
+    public class InternalAssembler : Person
     {
         public InternalAssembler() { }
 
@@ -16,13 +16,8 @@ namespace GestActives
             Name = name;
             Surname = surname;
             Enterprise = enterprise;
+            Discriminator = "InternalAssembler";
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
